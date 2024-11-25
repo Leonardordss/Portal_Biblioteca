@@ -61,7 +61,7 @@ nav{
 }
 
 #logo img{
-    width: 90px;
+    width: 280px;
 }
 
 #menu-button{
@@ -81,7 +81,7 @@ nav{
 }
 
 #menu-logo{
-    width: 110px;
+    width: 280px;
     margin-top: 30px;
     margin-bottom: 10px;
 }
