@@ -1,25 +1,28 @@
 <template>
-    <div class="login">
-        <h1>Login</h1>
-        <form @submit.prevent="loginUser"></form>
-        <div>
-            <label>Nome</label>
-            <input v-model="nome" type="nome" required />
-        </div>
-        <div>
-            <label>Senha</label>
-            <input v-model="password" type="password" required />
-        </div>
-        <form>
-            <p v-if="message">{{message}}</p>
-        </form>
-    </div> 
+    <main>
+        <div class="login">
+            <h1>Login</h1>
+            <form @submit.prevent="loginUser"></form>
+            <div>
+                <label>Nome</label>
+                <input v-model="nome" type="nome" required />
+            </div>
+            <div>
+                <label>Senha</label>
+                <input v-model="password" type="password" required />
+            </div>
+            <form>
+                <p v-if="message">{{message}}</p>
+            </form>
+        </div> 
+    </main>
 </template>
 
 <script>
 import api from '../axios';
 
 export default {
+    name: 'AppLogin'
     data() {
         return {
             nome: '',
@@ -49,5 +52,17 @@ export default {
 </script>
 
 <style scoped>
+
+main{
+    background-color: var(--color-background-home);
+    justify-content: center;
+    align-items: center;
+}
+
+.text-top{
+    color: var(--color-text-light);
+    font-size: 22px;
+    margin-bottom: 30px;
+}
 
 </style>
