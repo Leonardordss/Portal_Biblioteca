@@ -11,8 +11,11 @@
 </template>
 
 <script>
+
 export default {
-    name: 'AppDashboard'
+    name: 'AppDashboard'}
+
+export default {
     methods: {
         logout() {
             localStorage.removeItem('token');
