@@ -33,7 +33,7 @@ export default {
     methods: {
         async loginUser() {
             try {
-                const response = await api.post('./auth/login', {
+                const response = await api.post('/auth/login', {
                     nome: this.nome,
                     password: this.password,
                 });
