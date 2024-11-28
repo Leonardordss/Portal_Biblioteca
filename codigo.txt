@@ -1,0 +1,44 @@
+﻿<template>
+<div>
+    <h1>Página Protegida</h1>
+    <p v-if="isAuthenticated">Você precisa estar logado para acessar essa página</p>
+    <p v-else>Bem vindo! Você está autenticado</p>
+</div>
+</template>
+
+<script>
+import {isAuthenticated} from '../auth';
+
+export default {
+
+computed: {
+
+isAuthenticated() {
+
+return is Authenticated();
+
+},
+},
+};
+
+</script>
+
+<template>
+  <div>
+    <button @click="logoutUser">Sair</button>
+  </div>
+</template>
+
+<script>
+import {logout} from '../auth';
+
+export default {
+  methods: {
+    logoutUser() {
+      logout();
+      this.$router.push('/login');
+    },
+  },
+};
+
+</script>

@@ -22,9 +22,7 @@
 import api from '../axios';
 
 export default {
-    name: 'AppLogin'}
-
-export default {
+    name: 'AppLogin',
     data() {
         return {
             nome: '',

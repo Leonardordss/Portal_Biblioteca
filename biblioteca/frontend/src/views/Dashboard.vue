@@ -13,15 +13,13 @@
 <script>
 
 export default {
-    name: 'AppDashboard'}
-
-export default {
+    name: 'AppDashboard',
     methods: {
         logout() {
             localStorage.removeItem('token');
-            this.$router.push('./Login.vue')
-        },
-    },
+            this.$router.push('./Login.vue');
+        }
+    }
 };
 
 </script>
