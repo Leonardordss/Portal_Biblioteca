@@ -13,7 +13,7 @@
 
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/login">Login</a></li>
+                    <li><a href="../views/Login.vue">Login</a></li>
                     <li><a href="/catalogo">Catálogo</a></li>
                     <li><a href="/contato">Contato</a></li>
                 </ul>
