@@ -5,7 +5,7 @@
         <form @submit.prevent="loginUser">
           <div>
             <label>Nome</label>
-            <input v-model="nome" type="text" required />
+            <input v-model="username" type="text" required />
           </div>
           <div>
             <label>Senha</label>
@@ -25,7 +25,7 @@
     name: 'AppLogin',
     data() {
       return {
-        nome: '',
+        username: '',
         password: '',
         message: '',
       };
@@ -33,14 +33,16 @@
     methods: {
       async loginUser() {
         try {
-          const response = await api.post('/auth/login', {
-            nome: this.nome,
+          const response = await api.post('/api/auth/login', {
+            username: this.username,
             password: this.password,
           });
           this.message = 'Login bem-sucedido!';
           localStorage.setItem('token', response.data.token);
           this.$router.push('./Dashboard');
         } catch (error) {
+             // Logando o erro completo para diagnosticar
+    console.error('Erro ao fazer login:', error.response);
           this.message =
             error.response && error.response.data && error.response.data.message
               ? error.response.data.message
