@@ -1,59 +1,62 @@
 <template>
-    <div class="login-container">
-      <div class="login">
-        <h1>Login</h1>
-        <form @submit.prevent="loginUser">
-          <div>
-            <label>Nome</label>
-            <input v-model="username" type="text" required />
-          </div>
-          <div>
-            <label>Senha</label>
-            <input v-model="password" type="password" required />
-          </div>
-          <button type="submit">Entrar</button>
-          <p v-if="message">{{ message }}</p>
-        </form>
-      </div>
+  <div class="login-container">
+    <div class="login">
+      <h1>Login</h1>
+      <form @submit.prevent="loginUser">
+        <div>
+          <label>Nome</label>
+          <input v-model="username" type="text" required />
+        </div>
+        <div>
+          <label>Senha</label>
+          <input v-model="password" type="password" required />
+        </div>
+        <button type="submit">Entrar</button>
+        <p v-if="message">{{ message }}</p>
+      </form>
+
+      <!-- Link para redirecionar para a página de registro -->
+      <p>Ainda não tem uma conta? <router-link to="/register">Registre-se aqui</router-link></p>
     </div>
-  </template>
-  
-  <script>
-  import api from '../axios';
-  
-  export default {
-    name: 'AppLogin',
-    data() {
-      return {
-        username: '',
-        password: '',
-        message: '',
-      };
+  </div>
+</template>
+
+<script>
+import api from '../axios'; // Importando a instância do Axios
+
+export default {
+  name: 'AppLogin',
+  data() {
+    return {
+      username: '',
+      password: '',
+      message: '',
+    };
+  },
+  methods: {
+    // Método para login de usuário
+    async loginUser() {
+      try {
+        const response = await api.post('http://localhost:5000/api/auth/login', {
+          username: this.username,
+          password: this.password,
+        });
+        this.message = 'Login bem-sucedido!';
+        localStorage.setItem('token', response.data.token); // Armazena o token no localStorage
+        this.$router.push('/dashboard'); // Redireciona para o dashboard
+      } catch (error) {
+        console.error('Erro ao fazer login:', error.response);
+        this.message =
+          error.response && error.response.data && error.response.data.message
+            ? error.response.data.message
+            : 'Erro ao fazer login.';
+      }
     },
-    methods: {
-      async loginUser() {
-        try {
-          const response = await api.post('/api/auth/login', {
-            username: this.username,
-            password: this.password,
-          });
-          this.message = 'Login bem-sucedido!';
-          localStorage.setItem('token', response.data.token);
-          this.$router.push('./Dashboard');
-        } catch (error) {
-             // Logando o erro completo para diagnosticar
-    console.error('Erro ao fazer login:', error.response);
-          this.message =
-            error.response && error.response.data && error.response.data.message
-              ? error.response.data.message
-              : 'Erro ao fazer login.';
-        }
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
+  },
+};
+</script>
+
+ <style scoped>
   /* Container principal que ocupa toda a tela */
   .login-container {
     display: flex;
@@ -116,4 +119,4 @@
     }
   }
   </style>
-  
+

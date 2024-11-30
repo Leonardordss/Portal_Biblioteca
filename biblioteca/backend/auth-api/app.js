@@ -1,8 +1,11 @@
 require('dotenv').config();  // Carrega variáveis do arquivo .env
 
+
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+app.use(cors());
 
 const jwtSecret = process.env.JWT_SECRET; // Acessa o valor de JWT_SECRET
 

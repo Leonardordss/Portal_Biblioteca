@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-// Define o esquema de usuario
-
 const userSchema = new mongoose.Schema({
-    username:{ type: String, required: true, unique: true},
-    password: { type: String, required: true}
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
 });
 
-// Exporta o modelo de usuário
+// Cria índice para garantir que 'username' seja único
+userSchema.index({ username: 1 }, { unique: true });
 
-module.exports = mongoose.model('User',userSchema);
+module.exports = mongoose.model('User', userSchema);

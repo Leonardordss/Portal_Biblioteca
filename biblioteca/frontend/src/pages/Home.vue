@@ -38,21 +38,21 @@
     }
     
     #livro1{
-        width: 150px;
+        width: 130px;
         margin-right: 30px;
     }
     
     #livro2{
-        width: 150px;
+        width: 130px;
         margin-left: 30px;
     }
     
     @media (min-width: 700px){
         #livro1{
-            width: 300px;
+            width: 200px;
         }
         #livro2{
-            width: 300px;
+            width: 200px;
         }
     }
     

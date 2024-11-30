@@ -1,14 +1,16 @@
-import { createApp } from 'vue'; // Vue 3
+// main.js
+import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import api from './axios';
+import api from './services/api'; // Corrigido o caminho do import
 
-const app = createApp(App); // Cria a instância da aplicação
+const app = createApp(App);
 
-// Registrando o Axios no Vue 3
-app.config.globalProperties.$http = api; // Disponibilizando o Axios globalmente
+// Registrando o Axios globalmente
+app.config.globalProperties.$http = api;
 
-app.use(router) // Usando o Vue Router
-   .mount('#app'); // Montando a aplicação no elemento com id 'app'
+app.use(router)
+   .mount('#app');
+
 
 
