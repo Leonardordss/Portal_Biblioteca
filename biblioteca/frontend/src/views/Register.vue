@@ -105,7 +105,7 @@
 
   /* Exibição da mensagem de erro ou sucesso */
   .register p {
-    color: red;
+    color: white;
     margin-top: 20px;
     text-align: center;
   }

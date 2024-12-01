@@ -4,6 +4,8 @@ import Home from '../pages/Home.vue';
 import Login from '../views/Login.vue'; // Certifique-se de que o caminho esteja correto
 import Register from '../views/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
+import Cadastro from '../pages/Cadastro.vue';
+import Catalogo from '../pages/Catalogo.vue';
 
 const routes = [
   {
@@ -26,6 +28,16 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/cadastro', // Rota para Cadastro.vue
+    name: 'Cadastro',
+    component: Cadastro,
+  },
+  {
+    path: '/catalogo',
+    name: 'Catalogo',
+    component: Catalogo,
   },
   {
     path: '/:catchAll(.*)',

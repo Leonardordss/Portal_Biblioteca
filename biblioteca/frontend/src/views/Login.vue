@@ -107,7 +107,7 @@ export default {
   
   /* Exibição da mensagem de erro ou sucesso */
   .login p {
-    color: red;
+    color: white;
     margin-top: 20px;
     text-align: center;
   }
