@@ -30,8 +30,7 @@ const upload = multer({
 exports.createBook = async (req, res) => {
   try {
     const { titulo, autor, ano } = req.body;
-    const capa =req.file.path  // Converte a imagem para Base64
-
+    const capa =req.file.path  ? req.file.path : req.file
     const newBook = new Book({
       titulo: titulo,
       autor: autor,

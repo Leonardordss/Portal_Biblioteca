@@ -7,19 +7,39 @@
       <form @submit.prevent="addBook">
         <div>
           <label>Título</label>
-          <input v-model="newBook.title" type="text" placeholder="Digite o título" required />
+          <input
+            v-model="newBook.titulo"
+            type="text"
+            placeholder="Digite o título"
+            required
+          />
         </div>
         <div>
           <label>Autor</label>
-          <input v-model="newBook.author" type="text" placeholder="Digite o autor" required />
+          <input
+            v-model="newBook.autor"
+            type="text"
+            placeholder="Digite o autor"
+            required
+          />
         </div>
         <div>
           <label>Ano</label>
-          <input v-model="newBook.year" type="number" placeholder="Digite o ano" required />
+          <input
+            v-model="newBook.ano"
+            type="number"
+            placeholder="Digite o ano"
+            required
+          />
         </div>
         <div>
           <label>Capa do Livro</label>
-          <input type="file" @change="handleImageUpload" accept="image/*" required />
+          <input
+            type="file"
+            @change="handleImageUpload"
+            accept="image/*"
+            required
+          />
         </div>
         <button type="submit">Adicionar Livro</button>
       </form>
@@ -32,9 +52,9 @@
       <ul v-if="books.length > 0">
         <li v-for="book in books" :key="book._id">
           <div>
-            <h3>{{ book.title }}</h3>
-            <p>Autor: {{ book.author }}</p>
-            <p>Ano: {{ book.year }}</p>
+            <h3>{{ book.titulo }}</h3>
+            <p>Autor: {{ book.autor }}</p>
+            <p>Ano: {{ book.ano }}</p>
             <button @click="editBook(book)">Atualizar</button>
             <button @click="deleteBook(book._id)">Deletar</button>
           </div>
@@ -51,7 +71,7 @@ export default {
   name: "CadastroLivro",
   data() {
     return {
-      newBook: { title: "", author: "", year: "", cover: null }, // Novo livro com imagem
+      newBook: { titulo: "", autor: "", ano: "", capa: null }, // Novo livro com imagem
       books: [], // Lista de livros cadastrados
     };
   },
@@ -61,27 +81,19 @@ export default {
   methods: {
     // Manipula o upload da imagem da capa
     handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.newBook.cover = e.target.result; // Salva a imagem como base64
-        };
-        reader.readAsDataURL(file);
-      }
+      this.newBook.capa = event.target.files[0];
+     
     },
     // Adicionar livro e enviar para o backend
     async addBook() {
       try {
         // Cria o FormData para enviar a capa e os dados do livro
         const formData = new FormData();
-        formData.append("titulo", this.newBook.title);
-        formData.append("autor", this.newBook.author);
-        formData.append("ano", this.newBook.year);
-        if (this.newBook.cover) {
-          formData.append("cover", this.newBook.cover);  // Adiciona a imagem da capa
-        }
-
+        formData.append("titulo", this.newBook.titulo);
+        formData.append("autor", this.newBook.autor);
+        formData.append("ano", this.newBook.ano);
+        formData.append("capa", this.newBook.capa); // Adiciona a imagem da capa
+      
         // Envia os dados para o backend
         await axios.post("http://localhost:5000/api/books", formData, {
           headers: {
@@ -100,7 +112,7 @@ export default {
     },
     // Resetar formulário
     resetForm() {
-      this.newBook = { title: "", author: "", year: "", cover: null };
+      this.newBook = { titulo: "", autor: "", ano: "", capa: null }; // Novo livro com imagem
     },
     // Carregar todos os livros cadastrados
     async fetchBooks() {
@@ -135,7 +147,7 @@ export default {
 .login-container {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;  /* Alinha o conteúdo ao topo */
+  align-items: flex-start; /* Alinha o conteúdo ao topo */
   height: calc(100vh - 120px);
   padding: 0 20px;
   box-sizing: border-box;
@@ -148,7 +160,7 @@ export default {
   background-color: var(--color-background-home);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;  /* Alinha o conteúdo ao topo */
+  justify-content: flex-start; /* Alinha o conteúdo ao topo */
   align-items: center;
   width: 50%;
   padding: 20px;
@@ -161,12 +173,12 @@ export default {
 .book-list {
   width: 50%;
   padding-left: 20px;
-  max-height: 100%;  /* Garante que a lista de livros não ultrapasse o limite da tela */
-  overflow-y: auto;  /* Permite rolagem quando houver muitos livros */
+  max-height: 100%; /* Garante que a lista de livros não ultrapasse o limite da tela */
+  overflow-y: auto; /* Permite rolagem quando houver muitos livros */
 }
 
 .book-list h2 {
-  color: #000;  /* Cor preta para o título da lista de livros */
+  color: #000; /* Cor preta para o título da lista de livros */
 }
 
 .book-list ul {
@@ -179,7 +191,7 @@ export default {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
-  color: #000;  /* Cor preta para o texto dos livros */
+  color: #000; /* Cor preta para o texto dos livros */
 }
 
 .book-list ul li div {
