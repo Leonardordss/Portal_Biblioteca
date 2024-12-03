@@ -2,35 +2,47 @@ const Book = require('../models/book');
 const multer = require("multer");
 
 // Configuração do multer para upload de imagens
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limite de tamanho do arquivo (5MB)
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!allowedTypes.includes(file.mimetype)) {
-      return cb(new Error('Tipo de arquivo inválido. Apenas imagens JPEG, PNG ou JPG são permitidas.'));
-    }
-    cb(null, true);
-  }
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Defina o diretório onde os arquivos serão salvos
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
-
+ 
+// Middleware do multer
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png/;
+    const mimetype = filetypes.test(file.mimetype);
+ 
+    if (mimetype) {
+      cb(null, true);
+    } else {
+      cb(new Error("Formato de arquivo inválido. Apenas JPEG e PNG são permitidos."));
+    }
+  },
+  limits: { fileSize: 1024 * 1024 * 2 }, // Limite de 2MB
+});
 // Criar um novo livro com capa
 exports.createBook = async (req, res) => {
   try {
     const { titulo, autor, ano } = req.body;
-    const capa = req.file ? req.file.buffer.toString("base64") : null; // Converte a imagem para Base64
+    const capa =req.file.path  // Converte a imagem para Base64
 
     const newBook = new Book({
       titulo: titulo,
       autor: autor,
       ano: ano,
-      cover: req.file ? req.file.buffer.toString("base64") : null,  // Caminho do arquivo ou outra forma de salvar a capa
+      capa: capa
     });
     await newBook.save();
 
     res.status(201).json({ message: 'Livro criado com sucesso!', book: newBook });
   } catch (error) {
+    console.log(error);
     
     res.status(500).json({ message: 'Erro ao criar livro', error });
   }

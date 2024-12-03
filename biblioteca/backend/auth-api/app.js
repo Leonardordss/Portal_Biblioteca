@@ -5,7 +5,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-app.use(cors({ origin: "http://localhost:8080" })); 
+app.use(cors()); 
 
 const jwtSecret = process.env.JWT_SECRET; // Acessa o valor de JWT_SECRET
 
@@ -13,6 +13,7 @@ const authRoutes = require('./routes/authRoutes');  // Supondo que as rotas de a
 const bookRoutes = require('./routes/bookRoutes');
 
 app.use(express.json());  // Para fazer o parse de JSON no corpo das requisições
+app.use('/uploads',express.static('uploads'));
 
 app.use('/api/auth', authRoutes);  // Rota de autenticação
 app.use('/api/books', bookRoutes);
