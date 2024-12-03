@@ -5,7 +5,7 @@
         <button @click="prevBook" class="nav-btn">◀</button>
         <div class="book-display">
           <div v-if="books.length" class="book-card">
-            <img :src="'http://localhost:5000/' + books[currentIndex].capa" alt="Capa do Livro" class="book-cover" /> -->
+            <img :src="'http://localhost:5000/' + books[currentIndex].capa" alt="Capa do Livro" class="book-cover" />
             <h2>{{ books[currentIndex].titulo }}</h2>
             <p>{{ books[currentIndex].autor }}</p>
             <p>{{ books[currentIndex].ano }}</p>

@@ -71,7 +71,7 @@ export default {
   name: "CadastroLivro",
   data() {
     return {
-      newBook: { titulo: "", autor: "", ano: "", capa: null }, // Novo livro com imagem
+      newBook: { titulo: "", autor: "", ano: "", capa: "" }, // Novo livro com imagem
       books: [], // Lista de livros cadastrados
     };
   },
@@ -112,7 +112,7 @@ export default {
     },
     // Resetar formulário
     resetForm() {
-      this.newBook = { titulo: "", autor: "", ano: "", capa: null }; // Novo livro com imagem
+      this.newBook = { titulo: "", autor: "", ano: "", capa: "" }; // Novo livro com imagem
     },
     // Carregar todos os livros cadastrados
     async fetchBooks() {
