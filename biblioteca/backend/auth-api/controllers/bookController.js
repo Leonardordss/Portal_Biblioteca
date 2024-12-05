@@ -30,7 +30,7 @@ const upload = multer({
 exports.createBook = async (req, res) => {
   try {
     const { titulo, autor, ano } = req.body;
-    const capa =req.file.path  ? req.file.path : req.file
+    const capa = req.file.path  ? req.file.path : req.file
     const newBook = new Book({
       titulo: titulo,
       autor: autor,
@@ -62,7 +62,8 @@ exports.updateBook = async (req, res) => {
   try {
     const { id } = req.params;
     const { titulo, autor, ano } = req.body;
-    const capa = req.file ? req.file.buffer.toString("base64") : undefined;
+    const capa = req.file ? req.file.path : undefined; // Somente atualiza a capa se houver um novo arquivo
+
 
     const updatedData = { titulo, autor, ano };
     if (capa) updatedData.capa = capa;

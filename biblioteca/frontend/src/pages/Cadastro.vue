@@ -212,6 +212,7 @@ export default {
 
 .book-list ul li button:hover {
   background-color: #e53e3e;
+  color: #fff;
 }
 
 .login input {

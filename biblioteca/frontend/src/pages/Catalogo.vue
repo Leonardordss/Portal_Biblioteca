@@ -68,7 +68,7 @@
   }
   
   .catalog-container h1 {
-    color: var(--color-text-title);
+        color: black;
     margin-bottom: 20px;
   }
   

@@ -15,7 +15,7 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="../views/Login.vue">Login</a></li>
                     <li><router-link to="/catalogo">Catálogo</router-link></li>
-                    <li><a href="/contato">Contato</a></li>
+                    <li><router-link to="/contato">Contato</router-link></li>
                 </ul>
             </div>
 

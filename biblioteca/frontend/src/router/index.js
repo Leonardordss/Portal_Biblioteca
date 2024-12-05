@@ -6,6 +6,7 @@ import Register from '../views/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Cadastro from '../pages/Cadastro.vue';
 import Catalogo from '../pages/Catalogo.vue';
+import Contato from '../pages/Contato.vue';
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     path: '/catalogo',
     name: 'Catalogo',
     component: Catalogo,
+  },
+  {
+    path: '/contato',
+    name: 'Contato',
+    component: Contato,
   },
   {
     path: '/:catchAll(.*)',

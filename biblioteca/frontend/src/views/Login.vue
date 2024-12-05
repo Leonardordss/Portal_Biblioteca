@@ -71,6 +71,7 @@ export default {
   /* Formulário de Login */
   .login {
     background-color: var(--color-background-home);
+    color: var(--color-text-light);
     display: flex;
     flex-direction: column;
     justify-content: center;
