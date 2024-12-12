@@ -1,27 +1,27 @@
 <template>
   <div id="app">
-
-    <Header />
-    <router-view></router-view>
-    <Footer />
-
+    <Header /> <!-- Componente de Cabeçalho -->
+    <router-view></router-view> <!-- Exibe a view atual do roteador -->
+    <Footer /> <!-- Componente de Rodapé -->
   </div>
 </template>
 
 
-<script>
-import './styles/global.css';
 
-import Header from './components/Header';
-import Footer from './components/Footer.vue';
+<script>
+import './styles/global.css'; // Importa o arquivo de estilo global
+
+import Header from './components/Header'; // Importa o componente Header
+import Footer from './components/Footer.vue'; // Importa o componente Footer
 
 export default {
-  name: 'App',
+  name: 'App', // Nome do componente
   components: {
-    Header,
-    Footer
+    Header, // Registra o componente Header
+    Footer // Registra o componente Footer
   }
 }
 </script>
+
 
 

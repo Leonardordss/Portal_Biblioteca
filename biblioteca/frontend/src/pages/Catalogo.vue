@@ -1,61 +1,76 @@
 <template>
-    <div class="catalog-container">
-      <h1>Catálogo de Livros</h1>
-      <div class="carousel">
-        <button @click="prevBook" class="nav-btn">◀</button>
-        <div class="book-display">
-          <div v-if="books.length" class="book-card">
-            <img :src="'http://localhost:5000/' + books[currentIndex].capa" alt="Capa do Livro" class="book-cover" />
-            <h2>{{ books[currentIndex].titulo }}</h2>
-            <p>{{ books[currentIndex].autor }}</p>
-            <p>{{ books[currentIndex].ano }}</p>
-          </div>
-          <div v-else>
-            <p>Nenhum livro cadastrado ainda.</p>
-          </div>
+  <div class="catalog-container">
+    <h1>Catálogo de Livros</h1>
+    <div class="carousel">
+      <!-- Botão para navegar para o livro anterior -->
+      <button @click="prevBook" class="nav-btn">◀</button>
+
+      <div class="book-display">
+        <!-- Verifica se há livros e exibe o livro atual -->
+        <div v-if="books.length" class="book-card">
+          <!-- Exibe a capa do livro, título, autor e ano -->
+          <img :src="'http://localhost:5000/' + books[currentIndex].capa" alt="Capa do Livro" class="book-cover" />
+          <h2>{{ books[currentIndex].titulo }}</h2>
+          <p>{{ books[currentIndex].autor }}</p>
+          <p>{{ books[currentIndex].ano }}</p>
         </div>
-        <button @click="nextBook" class="nav-btn">▶</button>
+        <!-- Caso não haja livros, exibe uma mensagem informando -->
+        <div v-else>
+          <p>Nenhum livro cadastrado ainda.</p>
+        </div>
       </div>
+
+      <!-- Botão para navegar para o próximo livro -->
+      <button @click="nextBook" class="nav-btn">▶</button>
     </div>
-  </template>
+  </div>
+</template>
+
   
-  <script>
-  import api from "../services/api";
-  
-  export default {
-    name: 'AppCatalogo',
-    data() {
-      return {
-        books: [],
-        currentIndex: 0,
-      };
+<script>
+import api from "../services/api";
+
+export default {
+  name: 'AppCatalogo', // Nome do componente
+  data() {
+    return {
+      books: [], // Lista de livros
+      currentIndex: 0, // Índice do livro atual
+    };
+  },
+  async created() {
+    await this.fetchBooks(); // Busca os livros ao criar o componente
+  },
+  methods: {
+    // Função para buscar os livros da API
+    async fetchBooks() {
+      try {
+        const response = await api.get("/books"); // Requisição para a API
+        this.books = response.data; // Armazena a resposta na lista de livros
+      } catch (error) {
+        console.error("Erro ao buscar livros:", error); // Exibe erro caso ocorra
+      }
     },
-    async created() {
-      await this.fetchBooks();
+
+    // Função para ir para o próximo livro
+    nextBook() {
+      if (this.books.length > 0) {
+        // Atualiza o índice para o próximo livro (circular)
+        this.currentIndex = (this.currentIndex + 1) % this.books.length;
+      }
     },
-    methods: {
-      async fetchBooks() {
-        try {
-          const response = await api.get("/books");
-          this.books = response.data;
-        } catch (error) {
-          console.error("Erro ao buscar livros:", error);
-        }
-      },
-      nextBook() {
-        if (this.books.length > 0) {
-          this.currentIndex = (this.currentIndex + 1) % this.books.length;
-        }
-      },
-      prevBook() {
-        if (this.books.length > 0) {
-          this.currentIndex =
-            (this.currentIndex - 1 + this.books.length) % this.books.length;
-        }
-      },
+
+    // Função para ir para o livro anterior
+    prevBook() {
+      if (this.books.length > 0) {
+        // Atualiza o índice para o livro anterior (circular)
+        this.currentIndex = (this.currentIndex - 1 + this.books.length) % this.books.length;
+      }
     },
-  };
-  </script>
+  },
+};
+</script>
+
   
   <style scoped>
   .catalog-container {
