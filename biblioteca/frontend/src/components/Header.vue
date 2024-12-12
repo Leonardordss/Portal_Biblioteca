@@ -1,16 +1,23 @@
 <template>
     <header>
+        <!-- Barra de navegação que contém o logo e o menu -->
         <nav class="container">
+            <!-- Logo da página que redireciona para a home -->
             <a href="/" id="logo"><img src="../assets/logo.jpg" /></a>
 
+            <!-- Ícone do menu. Quando clicado, chama a função openMenu -->
             <img v-on:click="openMenu" alt="Abrir menu" id="menu-button" src="../assets/menu.svg">
 
+            <!-- Sobreposição que aparece quando o menu está aberto. Clica nela para fechar o menu -->
             <div v-on:click="closeMenu" id="menu-overlay" v-if="menuActive"></div>
 
+            <!-- Itens do menu. Aparecem quando menuActive é verdadeiro (menu aberto) -->
             <div id="menu-itens" :class="{active:menuActive}">
 
+                <!-- Logo dentro do menu -->
                 <img src="../assets/logo.jpg" id="menu-logo">
 
+                <!-- Lista de links do menu -->
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="../views/Login.vue">Login</a></li>
@@ -25,22 +32,25 @@
 
 <script>
 export default{
-    name: 'AppHeader',
+    name: 'AppHeader', // Nome do componente
     data(){
         return{
-            menuActive: false
+            menuActive: false // Variável que controla se o menu está aberto ou fechado
         }
     },
     methods:{
+        // Função para abrir o menu. Altera menuActive para true, tornando o menu visível
         openMenu: function(){
             this.menuActive = true;
         },
+        // Função para fechar o menu. Altera menuActive para false, escondendo o menu
         closeMenu: function(){
             this.menuActive = false;
+        }
     }
 }
-}
 </script>
+
 
 <style scoped>
 
